@@ -8,8 +8,12 @@ const { Header, Content, Sider } = AntdLayout;
 const Layout = ({ children }) => {
   const items = [
     {
-      label: <Link to="/">Home</Link>,
-      key: "Home",
+      label: <Link to="/">Clients</Link>,
+      key: "Clients",
+    },
+    {
+      label: <Link to="/documents">Documents</Link>,
+      key: "Documents",
     },
   ];
 

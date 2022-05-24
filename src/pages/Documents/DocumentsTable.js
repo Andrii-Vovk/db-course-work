@@ -1,49 +1,36 @@
 import React, { useState, useEffect } from "react";
 
-import clients from "../../api/clients";
-import address from "../../api/address";
+import documents from "../../api/documents";
 import Table from "../../components/Table";
+
+import DocumentsDetailsTable from "./DocumentDetailsTable";
 
 import { message, Spin } from "antd";
 
-const Clients = () => {
-  const [occupations, setOccupations] = useState(null);
-  const [cities, setCities] = useState(null);
+const DocumentsTable = () => {
+  const [types, setTypes] = useState(null);
 
   useEffect(() => {
-    clients.getOccupations().then((data) => {
+    documents.getDocumentTypes().then((data) => {
       const formattedData = Object.fromEntries(
         data.data.map((item) => [item.id, item.name])
       );
-      setOccupations(formattedData);
-    });
-
-    address.getCities().then((data) => {
-      const formattedData = Object.fromEntries(
-        data.data.map((item) => [item.id, item.name])
-      );
-      setCities(formattedData);
+      setTypes(formattedData);
     });
   }, []);
 
   return (
     <div>
-      {occupations && cities ? (
+      {types ? (
         <Table
-          title="Clients"
+          title="Документи"
           columns={[
-            { title: "Ім'я", field: "firstName" },
-            { title: "Прізвище", field: "lastName" },
-            { title: "Телефон", field: "phone" },
-            { title: "Email", field: "email" },
+            { title: "Назва", field: "documentTitle" },
+            { title: "Номер", field: "documentNumber" },
+            { title: "Тип", field: "documentType.id", lookup: types },
             {
-              title: "Стать",
-              field: "gender",
-              lookup: { true: "Чоловік", false: "Жінка" },
-            },
-            {
-              title: "Дата народження",
-              field: "birthDate",
+              title: "Дата реєстрації",
+              field: "registrationDate",
               type: "date",
               dateSetting: {
                 format: "dd/MM/yyyy",
@@ -56,28 +43,30 @@ const Clients = () => {
                 />
               ),
             },
-            { title: "Професія", field: "occupation.id", lookup: occupations },
-            { title: "Місто", field: "cityId", lookup: cities },
-            { title: "Вулиця", field: "street" },
-            { title: "Будівля", field: "building" },
-            { title: "Квартира", field: "apartment" },
           ]}
+          detailPanel={(rowData) => (
+            <DocumentsDetailsTable
+              fields={rowData.documentFields}
+              docName={rowData.documentTitle}
+              documentId={rowData.id}
+            />
+          )}
           editable={{
             onRowDelete: (oldData) => {
-              return clients.deleteClient(oldData.id);
+              return documents.deleteDocuments(oldData.id);
             },
             onRowUpdate: (newData, oldData) => {
               let localData = { ...newData };
               delete localData["tableData"];
-              return clients
-                .editClient(localData.id, localData)
+              return documents
+                .putDocuments(localData.id, localData)
                 .catch((err) => {
                   message.error(err.response.data.message || err.message);
                 });
             },
             onRowAdd: (newData) => {
-              newData.occupationId = newData.occupation.id;
-              return clients.createClient(newData)
+              newData.documentTypeId = newData.documentType.id;
+              return documents.createDocuments(newData);
             },
           }}
           options={{
@@ -87,8 +76,8 @@ const Clients = () => {
           }}
           data={(query) => {
             return new Promise((resolve, reject) => {
-              clients
-                .getClients()
+              documents
+                .getDocuments()
                 .then((data) => {
                   resolve({
                     data: data.data,
@@ -110,4 +99,4 @@ const Clients = () => {
   );
 };
 
-export default Clients;
+export default DocumentsTable;

@@ -10,9 +10,17 @@ const clients = {
     return axios.put(`${routes.client}/${id}`, data);
   },
 
+  createClient: (data) => {
+    return axios.post(`${routes.client}`, data);
+  },
+
+  deleteClient: (id) => {
+    return axios.delete(`${routes.client}/${id}`);
+  },
+
   getOccupations: () => {
     return axios.get(`${routes.client}/occupations`);
-  }
+  },
 };
 
 export default clients;

@@ -1,11 +1,11 @@
 import { Routes, Route, Navigate } from "react-router-dom";
-import "./App.css";
 import "antd/dist/antd.css";
 import Layout from "./components/Layout";
 import { useSelector } from "react-redux";
 
 import Login from "./pages/Login";
 import Clients from "./pages/Clients";
+import Documents from "./pages/Documents";
 
 function App() {
   const token = useSelector((state) => state.auth.jwtToken);
@@ -17,6 +17,11 @@ function App() {
         <Route
           exact
           path="/"
+          element={token ? <Documents /> : <Navigate to="/login" />}
+        />
+        <Route
+          exact
+          path="/documents"
           element={token ? <Clients /> : <Navigate to="/login" />}
         />
       </Routes>
