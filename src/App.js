@@ -9,6 +9,7 @@ import Documents from "./pages/Documents";
 import InsuranceProposals from "./pages/InsuranceProposals";
 import InsuranceObjects from "./pages/InsuranceObjects";
 import Policies from "./pages/Policies";
+import Employees from "./pages/Employees";
 
 import Incidents from "./pages/Incidents";
 
@@ -48,6 +49,11 @@ function App() {
           exact
           path="/incidents"
           element={token ? <Incidents /> : <Navigate to="/login" />}
+        />
+        <Route
+          exact
+          path="/employees"
+          element={token ? <Employees /> : <Navigate to="/login" />}
         />
       </Routes>
     </Layout>

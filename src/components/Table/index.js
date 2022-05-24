@@ -52,7 +52,7 @@ const Table = (props) => {
     <MaterialTable
       {...props}
       icons={tableIcons}
-      tableRef={tableRef}
+      tableRef={props.refreshable ? tableRef : props?.tableRef}
       options={{
         paging: false,
         ...props?.options,

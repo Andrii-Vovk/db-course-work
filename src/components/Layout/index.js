@@ -9,6 +9,7 @@ import ArticleIcon from '@mui/icons-material/Article';
 import PostAddIcon from '@mui/icons-material/PostAdd';
 import HouseIcon from '@mui/icons-material/House';
 import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
+import PersonSearchIcon from '@mui/icons-material/PersonSearch';
 
 const { Header, Content, Sider } = AntdLayout;
 
@@ -43,6 +44,11 @@ const Layout = ({ children }) => {
       label: <Link to="/incidents">Incidents</Link>,
       key: "incidents",
       icon: <AccessibleForwardIcon />
+    },
+    {
+      label: <Link to="/employees">Employees</Link>,
+      key: "employees",
+      icon: <PersonSearchIcon />
     },
   ];
 
