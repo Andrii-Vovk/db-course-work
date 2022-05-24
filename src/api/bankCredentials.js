@@ -1,7 +1,7 @@
 import axios from "./index";
 import { routes } from "./routes";
 
-const employees = {
+const bankCredentials = {
   getBankCredentials: () => {
     return axios.get(`${routes.bankCredentials}`);
   },
@@ -23,4 +23,4 @@ const employees = {
   },
 };
 
-export default employees;
+export default bankCredentials;

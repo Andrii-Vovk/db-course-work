@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { useSelector } from "react-redux";
 
 import insuranceObjectsAPI from "../../api/insuranceObjects";
 import insuranceProposalsAPI from "../../api/insuranceProposals";
@@ -19,6 +20,8 @@ const PolicyTable = () => {
   const [bankCredentials, setBankCredentials] = useState(null);
   const [clientsData, setClientsData] = useState(null);
   const [employeeData, setEmployeeData] = useState(null);
+
+  const currentUserId = useSelector((state) => state.auth.id);
 
   useEffect(() => {
     insuranceObjectsAPI.getInsuranceObjects().then((data) => {
@@ -66,9 +69,15 @@ const PolicyTable = () => {
       employeeData ? (
         <Table
           title="Поліси"
+          refreshable
           columns={[
             { title: "Клієнт", field: "clientId", lookup: clientsData },
-            { title: "Менеджер", field: "employeeId", lookup: employeeData },
+            {
+              title: "Менеджер",
+              field: "employeeId",
+              lookup: employeeData,
+              editable: "never",
+            },
             {
               title: "Що страхуємо",
               field: "insuranceObjectId",
@@ -115,6 +124,7 @@ const PolicyTable = () => {
                 });
             },
             onRowAdd: (newData) => {
+              newData.employeeId = currentUserId;
               return policies.createPolicies(newData);
             },
           }}
@@ -127,6 +137,7 @@ const PolicyTable = () => {
                 insuranceProposal={rowData.insuranceProposal}
                 bankCredentials={rowData.bankCredentials}
                 payments={rowData.policyPayments}
+                incidents={rowData.incidents}
                 docs={rowData.policyDocuments}
                 policyId={rowData.id}
               />

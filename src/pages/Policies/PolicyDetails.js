@@ -7,6 +7,7 @@ import Masonry from "react-responsive-masonry";
 import styles from "./styles.module.scss";
 import PolicyDocumentsTable from "./PolicyDocumentsTable";
 import PolicyPaymentsTable from "./PolicyPaymentsTable";
+import IncidentsTable from "./IncidentsTable";
 
 import Tab from "@mui/material/Tab";
 import TabContext from "@mui/lab/TabContext";
@@ -20,6 +21,7 @@ const PolicyDetails = ({
   insuranceProposal,
   bankCredentials,
   payments,
+  incidents,
   docs,
   policyId,
 }) => {
@@ -42,6 +44,7 @@ const PolicyDetails = ({
             value="3"
             disabled={!["admin", "accountant"].includes(position.toLowerCase())}
           />
+          <Tab label="Інциденти" value="4" />
         </TabList>
         <TabPanel value="1">
           <Masonry gutter="20px">
@@ -170,6 +173,13 @@ const PolicyDetails = ({
         </TabPanel>
         <TabPanel value="3">
           <PolicyPaymentsTable payments={payments} policyId={policyId} />
+        </TabPanel>
+        <TabPanel value="4">
+          <IncidentsTable
+            incidents={incidents}
+            insuranceProposal={insuranceProposal}
+            policyId={policyId}
+          />
         </TabPanel>
       </TabContext>
     </Card>

@@ -23,6 +23,7 @@ const ObjectsTable = () => {
       {types ? (
         <Table
           title="Об'єкти страхування"
+          refreshable
           columns={[
             { title: "Назва", field: "name" },
             { title: "Опис", field: "description" },

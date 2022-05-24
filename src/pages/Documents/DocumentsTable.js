@@ -24,6 +24,7 @@ const DocumentsTable = () => {
       {types ? (
         <Table
           title="Документи"
+          refreshable
           columns={[
             { title: "Назва", field: "documentTitle" },
             { title: "Номер", field: "documentNumber" },

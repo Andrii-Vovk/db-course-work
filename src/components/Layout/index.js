@@ -4,6 +4,11 @@ import { Layout as AntdLayout, Menu } from "antd";
 import { Link } from "react-router-dom";
 
 import AccessibleForwardIcon from '@mui/icons-material/AccessibleForward';
+import AssignmentIndIcon from '@mui/icons-material/AssignmentInd';
+import ArticleIcon from '@mui/icons-material/Article';
+import PostAddIcon from '@mui/icons-material/PostAdd';
+import HouseIcon from '@mui/icons-material/House';
+import DocumentScannerIcon from '@mui/icons-material/DocumentScanner';
 
 const { Header, Content, Sider } = AntdLayout;
 
@@ -12,26 +17,31 @@ const Layout = ({ children }) => {
     {
       label: <Link to="/">Clients</Link>,
       key: "Clients",
-      icon: <AccessibleForwardIcon />
+      icon: <AssignmentIndIcon />
     },
     {
       label: <Link to="/documents">Documents</Link>,
       key: "Documents",
-      icon: <AccessibleForwardIcon />
+      icon: <ArticleIcon />
     },
     {
       label: <Link to="/proposals">Proposals</Link>,
       key: "Proposals",
-      icon: <AccessibleForwardIcon />
+      icon: <PostAddIcon />
     },
     {
       label: <Link to="/objects">Objects</Link>,
       key: "Objects",
-      icon: <AccessibleForwardIcon />
+      icon: <HouseIcon />
     },
     {
       label: <Link to="/policies">Policies</Link>,
       key: "policies",
+      icon: <DocumentScannerIcon />
+    },
+    {
+      label: <Link to="/incidents">Incidents</Link>,
+      key: "incidents",
       icon: <AccessibleForwardIcon />
     },
   ];

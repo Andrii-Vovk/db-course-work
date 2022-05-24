@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 
 import MaterialTable from "material-table";
 import { forwardRef } from "react";
@@ -18,8 +18,9 @@ import Remove from "@material-ui/icons/Remove";
 import SaveAlt from "@material-ui/icons/SaveAlt";
 import Search from "@material-ui/icons/Search";
 import ViewColumn from "@material-ui/icons/ViewColumn";
+import RefreshIcon from "@mui/icons-material/Refresh";
 
-const tableIcons = {
+export const tableIcons = {
   Add: forwardRef((props, ref) => <AddBox {...props} ref={ref} />),
   Check: forwardRef((props, ref) => <Check {...props} ref={ref} />),
   Clear: forwardRef((props, ref) => <Clear {...props} ref={ref} />),
@@ -41,17 +42,32 @@ const tableIcons = {
   SortArrow: forwardRef((props, ref) => <ArrowDownward {...props} ref={ref} />),
   ThirdStateCheck: forwardRef((props, ref) => <Remove {...props} ref={ref} />),
   ViewColumn: forwardRef((props, ref) => <ViewColumn {...props} ref={ref} />),
+  Refresh: forwardRef((props, ref) => <RefreshIcon {...props} ref={ref} />),
 };
 
-const Table = (props) => (
-  <MaterialTable
-    {...props}
-    icons={tableIcons}
-    options={{
-      paging: false,
-      ...props?.options,
-    }}
-  />
-);
+const Table = (props) => {
+  const tableRef = useRef();
+
+  return (
+    <MaterialTable
+      {...props}
+      icons={tableIcons}
+      tableRef={tableRef}
+      options={{
+        paging: false,
+        ...props?.options,
+      }}
+      actions={[
+        ...(Array.isArray(props?.actions) ? props.actions : []),
+        props?.refreshable && {
+          icon: RefreshIcon,
+          tooltip: "Refresh Data",
+          isFreeAction: true,
+          onClick: () => tableRef.current && tableRef.current.onQueryChange(),
+        },
+      ].filter(Boolean)}
+    />
+  );
+};
 
 export default Table;

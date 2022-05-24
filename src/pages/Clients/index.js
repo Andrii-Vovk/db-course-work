@@ -31,6 +31,7 @@ const Clients = () => {
       {occupations && cities ? (
         <Table
           title="Клієнти"
+          refreshable
           columns={[
             { title: "Ім'я", field: "firstName" },
             { title: "Прізвище", field: "lastName" },

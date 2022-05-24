@@ -23,6 +23,7 @@ const ProposalsTable = () => {
       {types ? (
         <Table
           title="Страхові пропозиції"
+          refreshable
           columns={[
             { title: "Назва", field: "name" },
             { title: "Опис", field: "description" },
