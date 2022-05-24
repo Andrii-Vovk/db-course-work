@@ -7,7 +7,7 @@ import { message, Spin } from "antd";
 
 const ProposalDetails = ({ risks, proposalId }) => {
   const [riskNames, setRisknames] = useState(null);
-  const [data, setData] = useState(risks);
+  const [data, setData] = useState(risks ?? []);
 
   useEffect(() => {
     insuranceProposals.getRisks().then((data) => {

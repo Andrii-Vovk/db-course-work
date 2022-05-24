@@ -29,6 +29,11 @@ const Layout = ({ children }) => {
       key: "Objects",
       icon: <AccessibleForwardIcon />
     },
+    {
+      label: <Link to="/policies">Policies</Link>,
+      key: "policies",
+      icon: <AccessibleForwardIcon />
+    },
   ];
 
   const [collapsed, setCollapsed] = useState(true);

@@ -8,6 +8,7 @@ import Clients from "./pages/Clients";
 import Documents from "./pages/Documents";
 import InsuranceProposals from "./pages/InsuranceProposals";
 import InsuranceObjects from "./pages/InsuranceObjects";
+import Policies from "./pages/Policies";
 
 function App() {
   const token = useSelector((state) => state.auth.jwtToken);
@@ -35,6 +36,11 @@ function App() {
           exact
           path="/objects"
           element={token ? <InsuranceObjects /> : <Navigate to="/login" />}
+        />
+        <Route
+          exact
+          path="/policies"
+          element={token ? <Policies /> : <Navigate to="/login" />}
         />
       </Routes>
     </Layout>

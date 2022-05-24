@@ -7,7 +7,7 @@ import { message, Spin } from "antd";
 
 const ObjectDetails = ({ props, objectId }) => {
   const [propNames, setPropNames] = useState(null);
-  const [data, setData] = useState(props);
+  const [data, setData] = useState(props ?? []);
 
   useEffect(() => {
     insuranceObjects.getPropNames().then((data) => {

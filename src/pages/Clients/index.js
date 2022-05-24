@@ -7,8 +7,8 @@ import Table from "../../components/Table";
 import { message, Spin } from "antd";
 
 const Clients = () => {
-  const [occupations, setOccupations] = useState(null);
-  const [cities, setCities] = useState(null);
+  const [occupations, setOccupations] = useState([]);
+  const [cities, setCities] = useState([]);
 
   useEffect(() => {
     clients.getOccupations().then((data) => {
@@ -30,7 +30,7 @@ const Clients = () => {
     <div>
       {occupations && cities ? (
         <Table
-          title="Clients"
+          title="Клієнти"
           columns={[
             { title: "Ім'я", field: "firstName" },
             { title: "Прізвище", field: "lastName" },

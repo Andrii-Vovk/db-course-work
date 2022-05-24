@@ -7,5 +7,8 @@ export const routes = {
   documents: "document",
   insuranceProposals: "insurance-proposal",
   insuranceObjects: "insurance-objects",
-  policy: "policies",
+  policies: "policies",
+  employee: "employees",
+  bankCredentials: "bank-credentials",
+  incidents: "incidents",
 };
