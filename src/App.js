@@ -16,12 +16,12 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route
           exact
-          path="/"
+          path="/documents"
           element={token ? <Documents /> : <Navigate to="/login" />}
         />
         <Route
           exact
-          path="/documents"
+          path="/"
           element={token ? <Clients /> : <Navigate to="/login" />}
         />
       </Routes>
