@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { Layout as AntdLayout, Menu } from "antd";
 import { Link } from "react-router-dom";
@@ -13,11 +13,26 @@ const Layout = ({ children }) => {
     },
   ];
 
+  const [collapsed, setCollapsed] = useState(true);
+
   return (
-    <AntdLayout style={{minHeight:"100vh"}}>
+    <AntdLayout style={{ minHeight: "100vh" }}>
       <Header>Insurance</Header>
-      <AntdLayout style={{minHeight:"100vh"}}>
-        <Sider width={200} className="site-layout-background">
+      <AntdLayout style={{ minHeight: "100vh" }}>
+        <Sider
+          collapsible
+          collapsed={collapsed}
+          onCollapse={() => setCollapsed(!collapsed)}
+          width={200}
+          className="site-layout-background"
+          style={{
+            overflow: "auto",
+            height: "100vh",
+            position: "sticky",
+            top: 0,
+            left: 0,
+          }}
+        >
           <Menu mode="inline" items={items} />
         </Sider>
         <AntdLayout>
