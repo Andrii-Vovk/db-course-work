@@ -5,4 +5,7 @@ export const routes = {
   client: "client",
   address: "address",
   documents: "document",
+  insuranceProposals: "insurance-proposal",
+  insuranceObjects: "insurance-objects",
+  policy: "policies",
 };

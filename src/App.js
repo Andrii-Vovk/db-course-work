@@ -6,6 +6,8 @@ import { useSelector } from "react-redux";
 import Login from "./pages/Login";
 import Clients from "./pages/Clients";
 import Documents from "./pages/Documents";
+import InsuranceProposals from "./pages/InsuranceProposals";
+import InsuranceObjects from "./pages/InsuranceObjects";
 
 function App() {
   const token = useSelector((state) => state.auth.jwtToken);
@@ -16,13 +18,23 @@ function App() {
         <Route exact path="/login" element={<Login />} />
         <Route
           exact
+          path="/"
+          element={token ? <Clients /> : <Navigate to="/login" />}
+        />
+        <Route
+          exact
           path="/documents"
           element={token ? <Documents /> : <Navigate to="/login" />}
         />
         <Route
           exact
-          path="/"
-          element={token ? <Clients /> : <Navigate to="/login" />}
+          path="/proposals"
+          element={token ? <InsuranceProposals /> : <Navigate to="/login" />}
+        />
+        <Route
+          exact
+          path="/objects"
+          element={token ? <InsuranceObjects /> : <Navigate to="/login" />}
         />
       </Routes>
     </Layout>

@@ -3,6 +3,8 @@ import React, { useState } from "react";
 import { Layout as AntdLayout, Menu } from "antd";
 import { Link } from "react-router-dom";
 
+import AccessibleForwardIcon from '@mui/icons-material/AccessibleForward';
+
 const { Header, Content, Sider } = AntdLayout;
 
 const Layout = ({ children }) => {
@@ -10,10 +12,22 @@ const Layout = ({ children }) => {
     {
       label: <Link to="/">Clients</Link>,
       key: "Clients",
+      icon: <AccessibleForwardIcon />
     },
     {
       label: <Link to="/documents">Documents</Link>,
       key: "Documents",
+      icon: <AccessibleForwardIcon />
+    },
+    {
+      label: <Link to="/proposals">Proposals</Link>,
+      key: "Proposals",
+      icon: <AccessibleForwardIcon />
+    },
+    {
+      label: <Link to="/objects">Objects</Link>,
+      key: "Objects",
+      icon: <AccessibleForwardIcon />
     },
   ];
 
