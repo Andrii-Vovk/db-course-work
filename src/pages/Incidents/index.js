@@ -82,10 +82,9 @@ const Incidents = () => {
               incidents
                 .getIncidents()
                 .then((data) => {
-                  console.log(data);
                   resolve({
                     data: data.data.filter(
-                      (item) => item.incidentReviews?.[0].statusid === 1
+                      (item) => item.incidentReviews?.[0]?.statusid === 1
                     ),
                   });
                 })

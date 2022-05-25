@@ -4,6 +4,7 @@ import Layout from "./components/Layout";
 import { useSelector } from "react-redux";
 
 import Login from "./pages/Login";
+import Stats from "./pages/Stats";
 import Clients from "./pages/Clients";
 import Documents from "./pages/Documents";
 import InsuranceProposals from "./pages/InsuranceProposals";
@@ -72,6 +73,11 @@ function App() {
           exact
           path="/admin"
           element={token ? <Admin /> : <Navigate to="/login" />}
+        />
+        <Route
+          exact
+          path="/stats"
+          element={token ? <Stats /> : <Navigate to="/login" />}
         />
       </Routes>
     </Layout>

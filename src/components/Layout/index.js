@@ -17,6 +17,7 @@ import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import SecurityIcon from "@mui/icons-material/Security";
 import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
+import AutoGraphIcon from '@mui/icons-material/AutoGraph';
 
 import styles from "./styles.module.scss";
 
@@ -81,6 +82,11 @@ const Layout = ({ children }) => {
           label: <Link to="/admin">Адміністрування</Link>,
           key: "admin",
           icon: <AdminPanelSettingsIcon />,
+        },
+        isAdmin() && {
+          label: <Link to="/stats">Статистика</Link>,
+          key: "stats",
+          icon: <AutoGraphIcon />,
         },
       ]
     : [];
