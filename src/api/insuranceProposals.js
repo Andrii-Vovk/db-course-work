@@ -22,7 +22,9 @@ const proposals = {
   },
 
   deleteInsuranceProposals: (id) => {
-    return axios.delete(`${routes.insuranceProposals}/insurance-proposals/${id}`);
+    return axios.delete(
+      `${routes.insuranceProposals}/insurance-proposals/${id}`
+    );
   },
 
   getTypes: () => {
@@ -41,11 +43,36 @@ const proposals = {
   },
 
   createRiskProposal: (data) => {
-    return axios.post(`${routes.insuranceProposals}/risk-insurance-proposal`, data);
+    return axios.post(
+      `${routes.insuranceProposals}/risk-insurance-proposal`,
+      data
+    );
   },
 
   deleteRiskProposal: (id) => {
-    return axios.delete(`${routes.insuranceProposals}/risk-insurance-proposal/${id}`);
+    return axios.delete(
+      `${routes.insuranceProposals}/risk-insurance-proposal/${id}`
+    );
+  },
+
+  getRisksNames: () => {
+    return axios.get(`${routes.insuranceProposals}/risks`);
+  },
+
+  getRisksNamesById: (id) => {
+    return axios.get(`${routes.insuranceProposals}/risks/${id}`);
+  },
+
+  putRisksNames: (id, data) => {
+    return axios.put(`${routes.insuranceProposals}/risks/${id}`, data);
+  },
+
+  createRisksNames: (data) => {
+    return axios.post(`${routes.insuranceProposals}/risks`, data);
+  },
+
+  deleteRisksNames: (id) => {
+    return axios.delete(`${routes.insuranceProposals}/risks/${id}`);
   },
 };
 

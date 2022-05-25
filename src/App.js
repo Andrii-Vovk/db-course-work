@@ -10,6 +10,9 @@ import InsuranceProposals from "./pages/InsuranceProposals";
 import InsuranceObjects from "./pages/InsuranceObjects";
 import Policies from "./pages/Policies";
 import Employees from "./pages/Employees";
+import Salaries from "./pages/Salaries";
+import BankCredentials from "./pages/BankCredentials";
+import Admin from "./pages/Admin";
 
 import Incidents from "./pages/Incidents";
 
@@ -54,6 +57,21 @@ function App() {
           exact
           path="/employees"
           element={token ? <Employees /> : <Navigate to="/login" />}
+        />
+        <Route
+          exact
+          path="/salaries"
+          element={token ? <Salaries /> : <Navigate to="/login" />}
+        />
+        <Route
+          exact
+          path="/bankCredentials"
+          element={token ? <BankCredentials /> : <Navigate to="/login" />}
+        />
+        <Route
+          exact
+          path="/admin"
+          element={token ? <Admin /> : <Navigate to="/login" />}
         />
       </Routes>
     </Layout>

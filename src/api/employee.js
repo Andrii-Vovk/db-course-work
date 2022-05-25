@@ -26,6 +26,10 @@ const employees = {
     return axios.get(`/salary/employee/${id}/check`);
   },
 
+  getSalary: () => {
+    return axios.get(`/salary`);
+  },
+
   paySalary: (id, accId) => {
     return axios.post(`/salary/employee/${id}?accountantId=${accId}`);
   },

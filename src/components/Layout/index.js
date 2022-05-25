@@ -13,8 +13,10 @@ import PostAddIcon from "@mui/icons-material/PostAdd";
 import HouseIcon from "@mui/icons-material/House";
 import DocumentScannerIcon from "@mui/icons-material/DocumentScanner";
 import PersonSearchIcon from "@mui/icons-material/PersonSearch";
-
+import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
 import SecurityIcon from "@mui/icons-material/Security";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+import AdminPanelSettingsIcon from '@mui/icons-material/AdminPanelSettings';
 
 import styles from "./styles.module.scss";
 
@@ -24,45 +26,61 @@ const Layout = ({ children }) => {
   const position = useSelector((state) => state.auth.user.position);
   const token = useSelector((state) => state.auth.jwtToken);
   const isManager = () => ["manager", "admin"].includes(position.toLowerCase());
+  const isAdmin = () => ["admin"].includes(position.toLowerCase());
   const isAccountant = () =>
     ["accountant", "admin"].includes(position.toLowerCase());
 
   const items = token
     ? [
         isManager() && {
-          label: <Link to="/">Clients</Link>,
+          label: <Link to="/">Клієнти</Link>,
           key: "Clients",
           icon: <AssignmentIndIcon />,
         },
         isManager() && {
-          label: <Link to="/documents">Documents</Link>,
+          label: <Link to="/documents">Документи</Link>,
           key: "Documents",
           icon: <ArticleIcon />,
         },
         isManager() && {
-          label: <Link to="/proposals">Proposals</Link>,
+          label: <Link to="/proposals">Пропозиції</Link>,
           key: "Proposals",
           icon: <PostAddIcon />,
         },
         isManager() && {
-          label: <Link to="/objects">Objects</Link>,
+          label: <Link to="/objects">Об'єкти</Link>,
           key: "Objects",
           icon: <HouseIcon />,
         },
         {
-          label: <Link to="/policies">Policies</Link>,
+          label: <Link to="/policies">Поліси</Link>,
           key: "policies",
           icon: <DocumentScannerIcon />,
         },
         isAccountant() && {
-          label: <Link to="/incidents">Incidents</Link>,
+          label: <Link to="/incidents">Інциденти</Link>,
           key: "incidents",
           icon: <AccessibleForwardIcon />,
         },
         {
-          label: <Link to="/employees">Employees</Link>,
+          label: <Link to="/employees">Працівники</Link>,
           key: "employees",
           icon: <PersonSearchIcon />,
+        },
+        isAccountant() && {
+          label: <Link to="/salaries">Зарплати</Link>,
+          key: "salaries",
+          icon: <AttachMoneyIcon />,
+        },
+        isAccountant() && {
+          label: <Link to="/bankCredentials">Банківські дані</Link>,
+          key: "bankCredentials",
+          icon: <MonetizationOnIcon />,
+        },
+        isAdmin() && {
+          label: <Link to="/admin">Адміністрування</Link>,
+          key: "admin",
+          icon: <AdminPanelSettingsIcon />,
         },
       ]
     : [];

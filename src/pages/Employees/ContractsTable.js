@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import { useSelector } from "react-redux";
+
 import contractsAPI from "../../api/contracts";
 import bankCredentialsAPI from "../../api/bankCredentials";
 import Table from "../../components/Table";
@@ -39,9 +41,13 @@ const ContractsTable = ({ contracts, employeeId }) => {
     });
   }, []);
 
+  const position = useSelector((state) => state.auth.user.position);
+
   return (
     <div>
-      <SalaryInfo employeeId={employeeId} />
+      {["admin", "accountant"].includes(position.toLowerCase()) && (
+        <SalaryInfo employeeId={employeeId} />
+      )}
       {policyBonuses && positions ? (
         <Table
           title={`Контракти`}

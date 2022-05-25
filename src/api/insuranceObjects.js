@@ -26,8 +26,32 @@ const objects = {
     return axios.get(`${routes.insuranceObjects}/types`);
   },
 
+  postTypes: (data) => {
+    return axios.post(`${routes.insuranceObjects}/types`, data);
+  },
+
+  putTypes: (id, data) => {
+    return axios.put(`${routes.insuranceObjects}/types/${id}`, data);
+  },
+
+  deleteTypes: (id) => {
+    return axios.delete(`${routes.insuranceObjects}/types/${id}`);
+  },
+
   getPropNames: () => {
     return axios.get(`${routes.insuranceObjects}/props/names`);
+  },
+
+  postPropNames: (data) => {
+    return axios.post(`${routes.insuranceObjects}/props/names`, data);
+  },
+
+  putPropNames: (id, data) => {
+    return axios.put(`${routes.insuranceObjects}/props/names/${id}`, data);
+  },
+
+  deletePropNames: (id) => {
+    return axios.delete(`${routes.insuranceObjects}/props/names/${id}`);
   },
 
   postProps: (data) => {

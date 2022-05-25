@@ -19,7 +19,7 @@ const documents = {
   },
 
   deleteDocuments: (id) => {
-    return axios.put(`${routes.documents}/${id}`);
+    return axios.delete(`${routes.documents}/${id}`);
   },
 
   addField: (data) => {
@@ -38,8 +38,32 @@ const documents = {
     return axios.get(`${routes.documents}/field-names`);
   },
 
+  addFieldNames: (data) => {
+    return axios.post(`${routes.documents}/field-names`, data);
+  },
+
+  putFieldNames: (id, data) => {
+    return axios.put(`${routes.documents}/field-names/${id}`, data);
+  },
+
+  deleteFieldNames: (id) => {
+    return axios.delete(`${routes.documents}/field-names/${id}`);
+  },
+
   getDocumentTypes: () => {
     return axios.get(`${routes.documents}/types`);
+  },
+
+  putDocumentTypes: (id, data) => {
+    return axios.put(`${routes.documents}/types/${id}`, data);
+  },
+
+  createDocumentTypes: (data) => {
+    return axios.post(`${routes.documents}/types`, data);
+  },
+
+  deleteDocumentTypes: (id) => {
+    return axios.delete(`${routes.documents}/types/${id}`);
   },
 };
 

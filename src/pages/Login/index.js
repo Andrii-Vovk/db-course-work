@@ -41,6 +41,7 @@ const Login = () => {
                 <Input
                   name="password"
                   placeholder="Password"
+                  type="password"
                   onChange={handleChange}
                   onBlur={handleBlur}
                   value={values.password}

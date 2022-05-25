@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from "react";
 
+import { useSelector } from "react-redux";
+
 import employee from "../../api/employee";
 import Table from "../../components/Table";
 import ContractsTable from "./ContractsTable";
-
 
 import { Card, message, Spin } from "antd";
 
@@ -18,6 +19,8 @@ const Employees = () => {
       setOffices(formattedData);
     });
   }, []);
+
+  const { position } = useSelector((state) => state.auth.user);
 
   return (
     <div>
@@ -57,23 +60,25 @@ const Employees = () => {
               </Card>
             );
           }}
-          editable={{
-            onRowDelete: (oldData) => {
-              return employee.deleteEmployee(oldData.id);
-            },
-            onRowUpdate: (newData, oldData) => {
-              let localData = { ...newData };
-              delete localData["tableData"];
-              return employee
-                .putEmployee(localData.id, localData)
-                .catch((err) => {
-                  message.error(err.response.data.message || err.message);
-                });
-            },
-            onRowAdd: (newData) => {
-              return employee.createEmployee(newData);
-            },
-          }}
+          editable={
+            ["manager", "admin"].includes(position.toLowerCase()) && {
+              onRowDelete: (oldData) => {
+                return employee.deleteEmployee(oldData.id);
+              },
+              onRowUpdate: (newData, oldData) => {
+                let localData = { ...newData };
+                delete localData["tableData"];
+                return employee
+                  .putEmployee(localData.id, localData)
+                  .catch((err) => {
+                    message.error(err.response.data.message || err.message);
+                  });
+              },
+              onRowAdd: (newData) => {
+                return employee.createEmployee(newData);
+              },
+            }
+          }
           data={(query) => {
             return new Promise((resolve, reject) => {
               employee
