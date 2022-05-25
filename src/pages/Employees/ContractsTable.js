@@ -5,6 +5,7 @@ import bankCredentialsAPI from "../../api/bankCredentials";
 import Table from "../../components/Table";
 
 import { message, Spin } from "antd";
+import SalaryInfo from "./SalaryInfo";
 
 const ContractsTable = ({ contracts, employeeId }) => {
   const [policyBonuses, setPolicyBonuses] = useState(null);
@@ -40,6 +41,7 @@ const ContractsTable = ({ contracts, employeeId }) => {
 
   return (
     <div>
+      <SalaryInfo employeeId={employeeId} />
       {policyBonuses && positions ? (
         <Table
           title={`Контракти`}

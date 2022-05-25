@@ -4,10 +4,8 @@ import employee from "../../api/employee";
 import Table from "../../components/Table";
 import ContractsTable from "./ContractsTable";
 
-import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
 
 import { Card, message, Spin } from "antd";
-import employees from "../../api/employee";
 
 const Employees = () => {
   const [offices, setOffices] = useState(null);

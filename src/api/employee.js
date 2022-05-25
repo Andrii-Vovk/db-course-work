@@ -22,6 +22,13 @@ const employees = {
     return axios.put(`${routes.employee}/${id}`);
   },
 
+  checkSalary: (id) => {
+    return axios.get(`/salary/employee/${id}/check`);
+  },
+
+  paySalary: (id, accId) => {
+    return axios.post(`/salary/employee/${id}?accountantId=${accId}`);
+  },
 
   getOffices: () => {
     return axios.get(`${routes.offices}`);
