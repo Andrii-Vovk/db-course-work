@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import insuranceProposals from "../../api/insuranceProposals";
 import Table from "../../components/Table";
 
-import { message, Spin } from "antd";
+import { Card, message, Spin } from "antd";
 import ProposalDetails from "./ProposalDetails";
 
 const ProposalsTable = () => {
@@ -63,10 +63,12 @@ const ProposalsTable = () => {
             },
           }}
           detailPanel={(rowData) => (
-            <ProposalDetails
-              proposalId={rowData.id}
-              risks={rowData.riskInsuranceProposals}
-            />
+            <Card>
+              <ProposalDetails
+                proposalId={rowData.id}
+                risks={rowData.riskInsuranceProposals}
+              />
+            </Card>
           )}
           options={{
             paging: false,

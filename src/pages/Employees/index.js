@@ -4,7 +4,10 @@ import employee from "../../api/employee";
 import Table from "../../components/Table";
 import ContractsTable from "./ContractsTable";
 
-import { message, Spin } from "antd";
+import MonetizationOnIcon from "@mui/icons-material/MonetizationOn";
+
+import { Card, message, Spin } from "antd";
+import employees from "../../api/employee";
 
 const Employees = () => {
   const [offices, setOffices] = useState(null);
@@ -18,14 +21,12 @@ const Employees = () => {
     });
   }, []);
 
-  const tableRef = useRef();
-
   return (
     <div>
       {offices ? (
         <Table
           title="Працівники"
-          tableRef={tableRef}
+          refreshable
           columns={[
             { title: "Логін", field: "login" },
             {
@@ -50,10 +51,12 @@ const Employees = () => {
           }}
           detailPanel={(rowData) => {
             return (
-              <ContractsTable
-                employeeId={rowData.id}
-                contracts={rowData.contracts}
-              />
+              <Card>
+                <ContractsTable
+                  employeeId={rowData.id}
+                  contracts={rowData.contracts}
+                />
+              </Card>
             );
           }}
           editable={{

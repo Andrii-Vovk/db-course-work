@@ -5,6 +5,8 @@ import insuranceProposals from "../../api/insuranceProposals";
 import Table from "../../components/Table";
 import Reimbursements from "./ReimbursementsTable";
 
+import { Card } from "antd";
+
 import { message, Spin } from "antd";
 
 const Incidents = () => {
@@ -68,10 +70,12 @@ const Incidents = () => {
             }),
           }}
           detailPanel={(rowData) => (
-            <Reimbursements
-              incidentId={rowData.id}
-              reimbursements={rowData.reimbursements}
-            />
+            <Card>
+              <Reimbursements
+                incidentId={rowData.id}
+                reimbursements={rowData.reimbursements}
+              />
+            </Card>
           )}
           data={(query) => {
             return new Promise((resolve, reject) => {

@@ -5,7 +5,7 @@ import Table from "../../components/Table";
 
 import DocumentsDetailsTable from "./DocumentDetailsTable";
 
-import { message, Spin } from "antd";
+import { Card, message, Spin } from "antd";
 
 const DocumentsTable = () => {
   const [types, setTypes] = useState(null);
@@ -46,11 +46,13 @@ const DocumentsTable = () => {
             },
           ]}
           detailPanel={(rowData) => (
-            <DocumentsDetailsTable
-              fields={rowData.documentFields}
-              docName={rowData.documentTitle}
-              documentId={rowData.id}
-            />
+            <Card>
+              <DocumentsDetailsTable
+                fields={rowData.documentFields}
+                docName={rowData.documentTitle}
+                documentId={rowData.id}
+              />
+            </Card>
           )}
           editable={{
             onRowDelete: (oldData) => {

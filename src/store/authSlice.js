@@ -23,9 +23,21 @@ export const authSlice = createSlice({
 
       state.user = action.payload.user;
     },
+    logOut: (state) => {
+      state.login = "";
+      state.jwtToken = "";
+      state.id = null;
+
+      state.user = {
+        firstName: "",
+        lastName: "",
+        email: "",
+        position: "",
+      };
+    },
   },
 });
 
-export const { setUser } = authSlice.actions;
+export const { setUser, logOut } = authSlice.actions;
 
 export default authSlice.reducer;

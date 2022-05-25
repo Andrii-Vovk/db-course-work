@@ -1,0 +1,26 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+
+  color: white;
+  text-transform: uppercase;
+  font-size: 18px;
+
+  & * {
+    color: white;
+  }
+}
+
+.auth {
+  font-size: 0.9rem;
+  display: flex;
+  gap: 25px;
+  align-items: center;
+}
+
+.flex {
+  gap: 10px;
+  display: flex;
+  align-items: center;
+}

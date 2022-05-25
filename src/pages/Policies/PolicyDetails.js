@@ -26,6 +26,7 @@ const PolicyDetails = ({
   policyId,
 }) => {
   const position = useSelector((state) => state.auth.user.position);
+  const isAccountant = () => ["accountant", "admin"].includes(position.toLowerCase());
 
   const [value, setValue] = useState("1");
 
@@ -42,7 +43,7 @@ const PolicyDetails = ({
           <Tab
             label="Оплата страхівок"
             value="3"
-            disabled={!["admin", "accountant"].includes(position.toLowerCase())}
+            disabled={!isAccountant()}
           />
           <Tab label="Інциденти" value="4" />
         </TabList>

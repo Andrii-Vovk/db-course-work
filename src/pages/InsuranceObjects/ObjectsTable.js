@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import insuranceObjects from "../../api/insuranceObjects";
 import Table from "../../components/Table";
 
-import { message, Spin } from "antd";
+import { Card, message, Spin } from "antd";
 import ObjectDetails from "./ObjectDetails";
 
 const ObjectsTable = () => {
@@ -48,10 +48,12 @@ const ObjectsTable = () => {
             },
           }}
           detailPanel={(rowData) => (
-            <ObjectDetails
-              objectId={rowData.id}
-              props={rowData.insuranceObjectProps}
-            />
+            <Card>
+              <ObjectDetails
+                objectId={rowData.id}
+                props={rowData.insuranceObjectProps}
+              />
+            </Card>
           )}
           options={{
             paging: false,

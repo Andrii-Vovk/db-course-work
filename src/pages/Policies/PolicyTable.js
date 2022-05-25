@@ -23,6 +23,9 @@ const PolicyTable = () => {
 
   const currentUserId = useSelector((state) => state.auth.id);
 
+  const position = useSelector((state) => state.auth.user.position);
+  const isManager = () => ["manager", "admin"].includes(position.toLowerCase());
+
   useEffect(() => {
     insuranceObjectsAPI.getInsuranceObjects().then((data) => {
       const formattedData = Object.fromEntries(
@@ -110,24 +113,26 @@ const PolicyTable = () => {
               ),
             },
           ]}
-          editable={{
-            onRowDelete: (oldData) => {
-              return policies.deletePolicies(oldData.id);
-            },
-            onRowUpdate: (newData, oldData) => {
-              let localData = { ...newData };
-              delete localData["tableData"];
-              return policies
-                .putPolicies(localData.id, localData)
-                .catch((err) => {
-                  message.error(err.response.data.message || err.message);
-                });
-            },
-            onRowAdd: (newData) => {
-              newData.employeeId = currentUserId;
-              return policies.createPolicies(newData);
-            },
-          }}
+          editable={
+            isManager() && {
+              onRowDelete: (oldData) => {
+                return policies.deletePolicies(oldData.id);
+              },
+              onRowUpdate: (newData, oldData) => {
+                let localData = { ...newData };
+                delete localData["tableData"];
+                return policies
+                  .putPolicies(localData.id, localData)
+                  .catch((err) => {
+                    message.error(err.response.data.message || err.message);
+                  });
+              },
+              onRowAdd: (newData) => {
+                newData.employeeId = currentUserId;
+                return policies.createPolicies(newData);
+              },
+            }
+          }
           detailPanel={(rowData) => {
             return (
               <PolicyDetails

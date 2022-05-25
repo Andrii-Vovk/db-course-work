@@ -8,6 +8,9 @@ import Table from "../../components/Table";
 import { message } from "antd";
 
 const ReviewsTable = ({ incidentId, incidentReviews }) => {
+  const position = useSelector((state) => state.auth.user.position);
+  const isManager = () => ["manager", "admin"].includes(position.toLowerCase());
+
   const [data, setData] = useState(incidentReviews ?? []);
 
   const [statuses, setStatuses] = useState(null);
@@ -59,37 +62,38 @@ const ReviewsTable = ({ incidentId, incidentReviews }) => {
           ),
         },
       ]}
-      detailPanel={(rowdata) => console.log(rowdata)}
-      editable={{
-        onRowDelete: (oldData) => {
-          setData(data.filter((row) => row.id !== oldData.id));
-          return incidentsAPI.deleteIncidentReviews(oldData.id);
-        },
-        onRowUpdate: (newData, oldData) => {
-          let localData = { ...newData };
-          delete localData["tableData"];
-          return incidentsAPI
-            .putIncidentReviews(localData.id, localData)
-            .then((res) => {
-              setData([
-                ...data.filter((item) => item.id != localData.id),
-                localData,
-              ]);
-              return res;
-            })
-            .catch((err) => {
-              message.error(err.response.data.message || err.message);
-            });
-        },
-        onRowAdd: (newData) => {
-          let formattedData = { ...newData };
-          console.log(incidentId);
-          formattedData.incidentId = incidentId;
-          formattedData.employeeId = currentUserId;
-          setData([...data, formattedData]);
-          return incidentsAPI.createIncidentReviews(formattedData);
-        },
-      }}
+      editable={
+        isManager() && {
+          onRowDelete: (oldData) => {
+            setData(data.filter((row) => row.id !== oldData.id));
+            return incidentsAPI.deleteIncidentReviews(oldData.id);
+          },
+          onRowUpdate: (newData, oldData) => {
+            let localData = { ...newData };
+            delete localData["tableData"];
+            return incidentsAPI
+              .putIncidentReviews(localData.id, localData)
+              .then((res) => {
+                setData([
+                  ...data.filter((item) => item.id != localData.id),
+                  localData,
+                ]);
+                return res;
+              })
+              .catch((err) => {
+                message.error(err.response.data.message || err.message);
+              });
+          },
+          onRowAdd: (newData) => {
+            let formattedData = { ...newData };
+            console.log(incidentId);
+            formattedData.incidentId = incidentId;
+            formattedData.employeeId = currentUserId;
+            setData([...data, formattedData]);
+            return incidentsAPI.createIncidentReviews(formattedData);
+          },
+        }
+      }
       options={{
         paging: false,
         search: false,

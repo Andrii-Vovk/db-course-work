@@ -25,7 +25,7 @@ const DocumentsDetailsTable = ({ fields, docName, documentId }) => {
     <div>
       {fieldNames ? (
         <Table
-          title={`Поля документа ${docName}`}
+          title={`Поля документа "${docName}"`}
           columns={[
             { title: "Назва", field: "fieldNameId", lookup: fieldNames },
             { title: "Значення", field: "fieldValue" },

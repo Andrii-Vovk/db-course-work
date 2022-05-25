@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 
+import { useSelector } from "react-redux";
+
 import documents from "../../api/documents";
 import policies from "../../api/policies";
 import Table from "../../components/Table";
@@ -11,6 +13,9 @@ const PolicyDocumentsTable = ({ docs, policyId }) => {
   const [docNumbers, setDocNumbers] = useState(null);
 
   const [data, setData] = useState(docs ?? []);
+
+  const position = useSelector((state) => state.auth.user.position);
+  const isManager = () => ["manager", "admin"].includes(position.toLowerCase());
 
   useEffect(() => {
     documents.getDocuments().then((data) => {
@@ -35,42 +40,44 @@ const PolicyDocumentsTable = ({ docs, policyId }) => {
           columns={[
             { title: "Назва", field: "documentId", lookup: documentNames },
             {
-              title: "Назва",
+              title: "Номер",
               field: "documentId",
               lookup: docNumbers,
               editable: "never",
             },
           ]}
-          editable={{
-            onRowDelete: (oldData) => {
-              setData(data.filter((row) => row.id !== oldData.id));
-              return policies.deleteDocuments(oldData.id);
-            },
-            onRowUpdate: (newData, oldData) => {
-              let localData = { ...newData };
-              delete localData["tableData"];
-              return policies
-                .putDocuments(localData.id, localData)
-                .then((res) => {
-                  setData([
-                    ...data.filter((item) => item.id != localData.id),
-                    localData,
-                  ]);
-                  return res;
-                })
-                .catch((err) => {
-                  message.error(err.response.data.message || err.message);
-                });
-            },
-            onRowAdd: (newData) => {
-              let formattedData = { ...newData };
-              formattedData.policyId = policyId;
-              console.log(formattedData);
-              console.log(policyId);
-              setData([...data, formattedData]);
-              return policies.postDocuments(formattedData);
-            },
-          }}
+          editable={
+            isManager() && {
+              onRowDelete: (oldData) => {
+                setData(data.filter((row) => row.id !== oldData.id));
+                return policies.deleteDocuments(oldData.id);
+              },
+              onRowUpdate: (newData, oldData) => {
+                let localData = { ...newData };
+                delete localData["tableData"];
+                return policies
+                  .putDocuments(localData.id, localData)
+                  .then((res) => {
+                    setData([
+                      ...data.filter((item) => item.id != localData.id),
+                      localData,
+                    ]);
+                    return res;
+                  })
+                  .catch((err) => {
+                    message.error(err.response.data.message || err.message);
+                  });
+              },
+              onRowAdd: (newData) => {
+                let formattedData = { ...newData };
+                formattedData.policyId = policyId;
+                console.log(formattedData);
+                console.log(policyId);
+                setData([...data, formattedData]);
+                return policies.postDocuments(formattedData);
+              },
+            }
+          }
           options={{
             paging: false,
             search: false,
